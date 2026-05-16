@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="login(event)">
+        <fieldset>
+            <legend>Login Form</legend>
+            <input type="text" placeholder="Enter username" name="fname">
+            <br>
+            <input type="text" placeholder="Enter your password" name="password">
+            <br>
+            <input type="text" placeholder="Enter your role" name="role">
+            <br>
+            <button type="submit">Submit</button> 
+        </fieldset>
+    </form>
+    <script>
+        function login(e)
+        {
+            e.preventDefault()
+            var username=e.target.fname.value
+            var password=e.target.password.value
+            var role=e.target.role.value
+            fetch("http://localhost:3600/login",{
+                method:"POST",
+                headers:{
+                               'Content-Type': 'application/json' 
+                },
+                body:JSON.stringify({username,password,role})
+
+            }).then((res)=>{
+               // console.log(res)
+                return res.json()
+            })
+           .then((data)=>{
+                console.log(data)
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <form onsubmit="signUp(event)">
+        <input type="text" placeholder="Enter your name" name="fname">
+        <br>
+        <br>
+        <input type="text" placeholder="Enter your role" name="role">
+        <br>
+        <br>
+        <input type="password" placeholder="Enter your password" name="pwd">
+        <br>
+        <br>
+              <button type="submit">Submit</button>
+    </form>
+    <script>
+            function signUp(e)
+            {
+                e.preventDefault()
+                var password=e.target.pwd.value
+                var username=e.target.fname.value
+                var role=e.target.role.value
+                console.log(e.target.pwd.value)
+                console.log(e.target.fname.value)
+                console.log(e.target.role.value)
+                fetch("http://localhost:3600/signUp",{
+                    method:"POST",
+                     headers: {
+                              'Content-Type': 'application/json' // Tell the server you're sending JSON
+                            },
+                    body:JSON.stringify({username,password,role}),
+
+                })
+                .then(()=>{
+                    alert("Signed in successfully!.........")
+                })
+            }
+</script>
+
+</body>
+</html>

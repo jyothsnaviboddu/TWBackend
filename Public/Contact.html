@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="Contact(event)">
+        <input type="text" placeholder="Enter your name" name="username">
+        <br>
+        <input type="text" placeholder="Enter your email" name="email">
+        <br>
+        <input type="text" placeholder="Enter your message" name="message">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function Contact(e)
+        {
+            e.preventDefault()
+            var name=e.target.username.value
+            var email=e.target.email.value
+            var message=e.target.message.value
+            fetch("http://localhost:3600/contact",{
+                method:"POST",
+                headers:{
+                           'Content-Type': 'application/json' // Tell the server you're sending JSON
+                         },
+                body:JSON.stringify({name,email,message})         
+
+            }).then(()=>{
+                
+            })
+        }
+    </script>
+</body>
+</html>
