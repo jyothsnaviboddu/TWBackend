@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #d{
+            display: flex;
+            flex-wrap: wrap;
+            border: 5px solid black;
+            padding: 30px;
+            margin: 10px;
+            gap: 10px;
+            list-style: none;
+        }
+        #d li{
+            height: 200px;
+            width: 200px;
+            border:3px solid black;
+            padding: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="addDoctor(event)">
+        <fieldset>
+            <legend>Doctor adding form</legend>
+        <input type="text" placeholder="Enter your name" name="name">
+        <br>
+        <input type="text" placeholder="Enter your email" name="email">
+        <br>
+        <input type="text" placeholder="Enter your degree" name="degree">
+        <br>
+        <input type="text" placeholder="Enter your speciality" name="speciality">
+        <br>
+        <input type="text" placeholder="Enter your gender" name="gender">
+        <br>
+        <input type="text" placeholder="Enter your experience" name="experience">
+        <br>
+        <input type="text" placeholder="Enter your fees" name="fees">
+        <br>
+        <input type="number" placeholder="Enter your phonenumber" name="phone">
+        <br>
+        <input type="text" placeholder="Enter your address" name="address">
+        <br>
+        <button type="submit">add doctor</button>
+        </fieldset>
+    </form>
+    <ul id="d">
+
+    </ul>
+</body>
+<script>
+   
+    var token=window.localStorage.getItem("token")
+   function doctors()
+   { 
+    fetch("http://localhost:3600/doctors",
+    {
+        headers:{
+                   'Content-Type': 'application/json' ,
+                 //  'token':token
+        }
+    }).then((res)=>
+    {
+        return res.json()
+    })
+    .then((data)=>{
+        console.log(data)
+        displaydoctors(data)
+    })
+}
+doctors()
+ /*
+   "name":String,
+    "email":String,
+    "degree":String,
+    "speciality":String,
+    "gender":String,
+    "experience":String,
+    "fees":Number,
+    "phone":Number,
+    "address":String,
+    "appointments":Number
+*/
+
+function addDoctor(e)
+{
+    e.preventDefault()
+    var name=e.target.name.value
+    var email=e.target.email.value
+    var degree=e.target.degree.value
+    var speciality=e.target.speciality.value
+    var gender=e.target.gender.value
+    var experience=e.target.experience.value
+    var fees=e.target.fees.value
+    var phone=e.target.phone.value
+    var address=e.target.address.value
+    fetch("http://localhost:3600/addDoctor",{
+        method:"POST",
+        headers:{
+                   'Content-Type': 'application/json' ,
+                   token:token
+        },
+        body:JSON.stringify({name,email,degree,speciality,gender,experience,fees,phone,address})
+    }).then((res)=>{
+       // res.json()
+       console.log(res.json())
+        doctors()
+    })
+    /*.then((data)=>{
+        console.log(data)
+    })*/
+ }
+   function displaydoctors(doctors)
+   {
+        var li=""
+       doctors.forEach((doctor)=>
+       {
+                 li+=`<li>
+                        <h3>${doctor.name}</h3>
+                        <b>${doctor.email}</b>
+                        <h3>${doctor.fees}</h3>
+                        <button onclick="deletedoctor('${doctor._id}')"}>Delete</button>
+                    </li>`
+       }) 
+       console.log(li)
+       document.getElementById("d").innerHTML=li
+   }
+   function deletedoctor(id)
+   {
+       // console.log(id)
+       fetch("http://localhost:3600/deleteDoctor",{
+        method:"DELETE",
+        headers:{
+                'Content-Type': 'application/json' ,
+                  token:token
+               },
+        body:JSON.stringify({id})
+               
+       }).then((res)=>{
+        console.log(res)
+        doctors()
+       })
+   }
+</script>
+</html>

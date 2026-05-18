@@ -18,7 +18,10 @@
             <button type="submit">Submit</button> 
         </fieldset>
     </form>
+    <a href="http://localhost:3600/Doctors.html">Doctors</a>
+    
     <script>
+    
         function login(e)
         {
             e.preventDefault()
@@ -38,6 +41,8 @@
             })
            .then((data)=>{
                 console.log(data)
+                var token=data.token
+                window.localStorage.setItem("token",token)
             })
         }
     </script>

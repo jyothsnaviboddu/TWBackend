@@ -24,7 +24,7 @@ const login=async (req,res)=>{
         console.log(a_u)
         if(a_u)
         {
-                        var  token=jwt.sign({...req.body},"Hello")
+                        var  token=jwt.sign({...req.body},"Hello Doctor")
                         res.send({msg:"login success",token,username:req.body.username})
 
         }  
@@ -56,7 +56,7 @@ const login=async (req,res)=>{
         console.log(a_u)
         if(a_u)
         {
-                        var  token=jwt.sign({...req.body},"Hello")
+                        var  token=jwt.sign({...req.body},"Hello Admin")
                         res.send({msg:"login success",token,username:req.body.username})
 
         }  
