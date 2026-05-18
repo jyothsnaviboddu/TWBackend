@@ -25,7 +25,7 @@ const login=async (req,res)=>{
         if(a_u)
         {
                         var  token=jwt.sign({...req.body},"Hello Doctor")
-                        res.send({msg:"login success",token,username:req.body.username})
+                        res.send({msg:"login success",token,username:req.body.username,role:req.body.role})
 
         }  
         else
@@ -57,7 +57,7 @@ const login=async (req,res)=>{
         if(a_u)
         {
                         var  token=jwt.sign({...req.body},"Hello Admin")
-                        res.send({msg:"login success",token,username:req.body.username})
+                        res.send({msg:"login success",token,username:req.body.username,role:req.body.role})
 
         }  
         else
@@ -67,6 +67,39 @@ const login=async (req,res)=>{
 
       
    }
+    else if(req.body.role==="user")
+   {
+        console.log("User role....")
+         await userModel.find({"role":req.body.role}).then((data)=>
+        {
+            //console.log("Iam in doctor")
+            users=data
+        })
+       // console.log(users)
+        const a_u=users.find((user)=>
+        {
+            
+                if(user.name===req.body.username && user.Password===req.body.password)
+                {
+                    return true;
+                }
+         
+        })
+        console.log(a_u)
+        if(a_u)
+        {
+                        var  token=jwt.sign({...req.body},"Hello User")
+                        res.send({msg:"login success",token,username:req.body.username,role:req.body.role})
+
+        }  
+        else
+        {
+            res.send({msg:"credentials mismatched"})
+        }     
+
+      
+   }
+  
    else
    {
             res.send("Credentials mismatched")
