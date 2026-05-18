@@ -20,8 +20,12 @@ const addDoctor=(req,res)=>
             "appointments":0
             })
             newDoctor.save()
+                res.send({"msg":"Doctor added successfully...."})
     }
-    res.send({"msg":"Doctor added successfully...."})
+    else
+    {
+        res.send({"msg":"doctor is not added"})
+    }
 }
 const deleteDoctor=(req,res)=>
 {
