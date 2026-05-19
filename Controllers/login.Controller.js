@@ -53,6 +53,10 @@ const login=async (req,res)=>
                 var token=jwt.sign({...req.body},"Hello Admin")
                 res.send({"msg":"Login Success",token,username:req.body.username})
            }
+           else
+           {
+                res.send({'msg':"credentails mismatch"})
+           }
      }
    else
    {
