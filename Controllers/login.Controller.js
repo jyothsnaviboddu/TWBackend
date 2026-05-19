@@ -35,7 +35,10 @@ const login=async (req,res)=>
    }
  else if(req.body.role==="admin")
      {
-            res.send({"msg":"hello"})
+           // res.send({"msg":"hello"})
+           await userModel.find().then((data)=>{
+            console.log(data)
+           })
      }
    else
    {
