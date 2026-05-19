@@ -36,7 +36,7 @@ const login=async (req,res)=>
  else if(req.body.role==="admin")
      {
         console.log("User role....")
-         await usersmodel.find({"role":req.body.role}).then((data)=>
+         await usersModel.find({"role":req.body.role}).then((data)=>
         {
             users=data
         })
