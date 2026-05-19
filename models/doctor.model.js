@@ -9,7 +9,8 @@ var doctorSchema=mongoose.Schema({
     "fees":Number,
     "phone":Number,
     "address":String,
-    "appointments":Number
+    "appointments":Number,
+    "status":String
 })
 var doctorModel=mongoose.model("doctor",doctorSchema)
 module.exports=doctorModel
