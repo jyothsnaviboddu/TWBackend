@@ -42,7 +42,7 @@ const login=async (req,res)=>
            })
            const a_u=users.find((user)=>
             {
-                 if(user.username===req.body.username && user.password===req.body.password)
+                 if(user.name===req.body.username && user.Password===req.body.password)
                 {
                     return true;
                 }
