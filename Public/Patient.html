@@ -50,7 +50,7 @@
                 var email=e.target.email.value
                 var phone=e.target.phone.value
                 console.log(name,dob,address,email,phone)
-                 await  fetch("http://localhost:3600/patient",{
+                 await  fetch("https://hospital-appointment-system-jxhx.onrender.com/patient",{
                     method:"POST",
                     headers:{
                               'Content-Type': 'application/json' 
@@ -96,7 +96,7 @@
         var status=e.target.status.value
         var time=e.target.time.value
        // console.log(JSON.stringify({id,doctorName,doctorName,consultataionFee,bookingDate,status}))
-        fetch(`http://localhost:3600/appointments`,
+        fetch(`https://hospital-appointment-system-jxhx.onrender.com/appointments`,
         {
             method:"POST",
             headers:{
