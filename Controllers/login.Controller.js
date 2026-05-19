@@ -4,6 +4,7 @@ const jwt=require("jsonwebtoken")
 const login=async (req,res)=>{
    // console.log(req.body)
    var users=[]
+   
     if(req.body.role==="user")
      {
         console.log("User role....")

@@ -10,11 +10,14 @@
         <fieldset>
             <legend>patient Registration</legend>
          <input type="text" placeholder="Enter your name" name="name">
-         
+         <input type="password" placeholder="Enter password" name="password">
+                 <input type="text" placeholder="Enter your role" name="role">
+
         <input type="date" placeholder="Select your date" name="date">
          <input type="text" placeholder="Enter your address" name="address">
         <input type="email" name="email" placeholder="Enter your email">
         <input type="text" name="phone" placeholder="Enter your phone">
+
         <button type="submit">Submit</button>
         </fieldset>
    
@@ -28,6 +31,7 @@
          <input type="text" placeholder="Enter your consultataionFee " name="consultataionFee">
         <input type="email" name="doctorMail" placeholder="Enter your email">
         <input type="text" name="status" placeholder="Enter your status">
+        <input type="time" name="time" placeholder="Select time">
         <button type="submit">Submit</button>
         </fieldset>
     </form>
@@ -40,6 +44,7 @@
             e.preventDefault()
                 var username=e.target.name.value
                 var password=e.target.password.value
+                var role=e.target.role.value
                 var dob=e.target.date.value
                 var address=e.target.address.value
                 var email=e.target.email.value
@@ -50,7 +55,7 @@
                     headers:{
                               'Content-Type': 'application/json' 
                            },
-                    body:JSON.stringify({name,dob,address,email,phone})
+                    body:JSON.stringify({username,password,role,dob,address,email,phone})
                 }).then((res)=>
                 {
                    // alert("Patient Registration successfully")
@@ -89,6 +94,7 @@
         var consultataionFee=e.target.consultataionFee.value
         var appointmentDate=e.target.bookingDate.value
         var status=e.target.status.value
+        var time=e.target.time.value
        // console.log(JSON.stringify({id,doctorName,doctorName,consultataionFee,bookingDate,status}))
         fetch(`http://localhost:3600/appointments`,
         {
@@ -96,7 +102,7 @@
             headers:{
                         'Content-Type': 'application/json'  
             },
-            body:JSON.stringify({patientId,doctorName,doctorMail,consultataionFee,appointmentDate,status})
+            body:JSON.stringify({patientId,doctorName,doctorMail,consultataionFee,appointmentDate,status,time})
         })
         .then((res)=>{
             alert("Appointment added successfully.....")

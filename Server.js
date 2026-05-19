@@ -37,7 +37,7 @@ app.post("/patient",(req,res)=>{
 app.post("/appointments",async (req,res)=>
 {       
     var patient=await patientmodel.findById(req.body.patientId)
-    var { patientId,doctorName, doctorMail,consultationFee, appointmentDate, status}=req.body
+    var { patientId,doctorName, doctorMail,consultationFee, appointmentDate, status,time}=req.body
     var Appointment=new appointmentmodel({
         patient:patientId,
         doctorName,
