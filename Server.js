@@ -77,7 +77,7 @@ app.get("/allPatients",(req,res)=>{
        })*/
 
 })
-app.post("/allAppointments",(req,res)=>
+app.get("/allAppointments",(req,res)=>
 {
      var found=jwt.verify(req.headers.token,"Hello Admin")
         if(found)
