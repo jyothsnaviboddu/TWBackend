@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="addPatient(event)">
+        <fieldset>
+            <legend>patient Registration</legend>
+         <input type="text" placeholder="Enter your name" name="name">
+        <input type="date" placeholder="Select your date" name="date">
+         <input type="text" placeholder="Enter your address" name="address">
+        <input type="email" name="email" placeholder="Enter your email">
+        <input type="text" name="phone" placeholder="Enter your phone">
+        <button type="submit">Submit</button>
+        </fieldset>
+   
+    </form>
+    <form onsubmit="addAppointment(event)">
+        <fieldset>
+            <legend>BookingAppointmentForm</legend>
+        <input type="text" name="patientId" id="pId">
+        <input type="text" placeholder="Enter your Doctorname" name="doctorName">
+        <input type="date" placeholder="Select date for appointment" name="bookingDate">
+         <input type="text" placeholder="Enter your consultataionFee " name="consultataionFee">
+        <input type="email" name="doctorMail" placeholder="Enter your email">
+        <input type="text" name="status" placeholder="Enter your status">
+        <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+    
+
+    <script>
+        var patient={}
+      async  function addPatient(e)
+        {
+            e.preventDefault()
+                var name=e.target.name.value
+                var dob=e.target.date.value
+                var address=e.target.address.value
+                var email=e.target.email.value
+                var phone=e.target.phone.value
+                console.log(name,dob,address,email,phone)
+                 await  fetch("http://localhost:3600/patient",{
+                    method:"POST",
+                    headers:{
+                              'Content-Type': 'application/json' 
+                           },
+                    body:JSON.stringify({name,dob,address,email,phone})
+                }).then((res)=>
+                {
+                   // alert("Patient Registration successfully")
+                  // console.log(res.json())
+                   return res.json()
+                })
+                .then((data)=>
+                {
+                    console.log(data)
+                    patient=data.newPatient
+                    console.log(patient)
+                    //console.log(patient._id)
+                   document.getElementById("pId").value=patient._id
+                })
+        }
+      //  console.log(patient)
+       /* "name":String,
+    "dob":Date,
+    "address":String,
+    "email":String,
+    "phone":String,*/
+    /*
+     "doctorName":String,
+    "doctorMail":String,
+    "consultataionFee":Number,
+    "bookingDate":Date,
+    "status":String
+
+    */
+   function addAppointment(e)
+   {
+        e.preventDefault()
+        var patientId=e.target.patientId.value
+        var doctorName=e.target.doctorName.value
+        var doctorMail=e.target.doctorMail.value
+        var consultataionFee=e.target.consultataionFee.value
+        var appointmentDate=e.target.bookingDate.value
+        var status=e.target.status.value
+       // console.log(JSON.stringify({id,doctorName,doctorName,consultataionFee,bookingDate,status}))
+        fetch(`http://localhost:3600/appointments`,
+        {
+            method:"POST",
+            headers:{
+                        'Content-Type': 'application/json'  
+            },
+            body:JSON.stringify({patientId,doctorName,doctorMail,consultataionFee,appointmentDate,status})
+        })
+        .then((res)=>{
+            alert("Appointment added successfully.....")
+        })
+   }
+    </script>
+</body>
+</html>

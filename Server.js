@@ -7,6 +7,8 @@ const connect=require("./db")
 const userModel=require("./models/users.Model")
 const contactModel=require("./models/contact.Model")
 const doctorModel=require("./models/doctor.model")
+const patientmodel=require("./models/Patient.Model")
+const appointmentmodel=require("./models/appointment.Model")
 const {sign}=require("./Controllers/user.Controller")
 const {login}=require("./Controllers/login.Controller")
 const {contact}=require("./Controllers/contact.Controller")
@@ -24,6 +26,39 @@ app.post("/contact",contact)
 app.post("/addDoctor",addDoctor)
 app.get("/doctors",allDoctors)
 app.delete("/deleteDoctor",deleteDoctor)
+app.post("/patient",(req,res)=>{
+     var newPatient=new patientmodel(req.body)
+      newPatient.save()
+    console.log(req.body)
+    res.send({"msg":"patient added",newPatient})
+
+      //console.log(req.body)
+})
+app.post("/appointments",async (req,res)=>
+{       
+    var patient=await patientmodel.findById(req.body.patientId)
+    var { patientId,doctorName, doctorMail,consultationFee, appointmentDate, status}=req.body
+    var Appointment=new appointmentmodel({
+        patient:patientId,
+        doctorName,
+        doctorMail,
+        consultationFee,
+        status,
+        appointmentDate
+    })
+    Appointment.save()
+    console.log(patient)
+  patient.appointments.push({
+      appointmentId: Appointment._id,
+      doctorName,
+      doctorMail,
+      consultationFee,
+      status,
+      appointmentDate
+    });
+    await patient.save()
+})
+
 app.listen(3600,()=>{
     console.log("Server is running successfully")
 })
