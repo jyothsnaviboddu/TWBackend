@@ -65,7 +65,7 @@ const updateDoctor=(req,res)=>
                     
                 },
      };
-const result = await collection.updateOne(filter, updateDoc);
+const result = await doctorModel.updateOne(filter, updateDoc);
 
 }
 module.exports={addDoctor,deleteDoctor,allDoctors}

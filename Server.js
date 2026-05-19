@@ -44,7 +44,8 @@ app.post("/appointments",async (req,res)=>
         doctorMail,
         consultationFee,
         status,
-        appointmentDate
+        appointmentDate,
+        time
     })
     Appointment.save()
     console.log(patient)
@@ -54,7 +55,8 @@ app.post("/appointments",async (req,res)=>
       doctorMail,
       consultationFee,
       status,
-      appointmentDate
+      appointmentDate,
+      time
     });
     await patient.save()
 })
