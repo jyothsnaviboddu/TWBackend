@@ -58,6 +58,38 @@ app.post("/appointments",async (req,res)=>
     });
     await patient.save()
 })
+app.get("/allPatients",(req,res)=>{
+        var found=jwt.verify(req.headers.token,"Hello Admin")
+        if(found)
+        {
+            patientmodel.find().then((data)=>{
+                res.send(data)
+            })
+        }
+        else
+        {
+            res.send({"msg":"You are not admin of this website"})
+        }
+      /* patientmodel.find().then((data)=>{
+             res.send(data)
+       })*/
+
+})
+app.post("/allAppointments",(req,res)=>
+{
+     var found=jwt.verify(req.headers.token,"Hello Admin")
+        if(found)
+        {
+            appointmentmodel.find().then((data)=>{
+                res.send(data)
+            })
+        }
+        else
+        {
+            res.send({"msg":"You are not admin of this website"})
+        }
+   
+})
 
 app.listen(3600,()=>{
     console.log("Server is running successfully")

@@ -10,6 +10,7 @@
         <fieldset>
             <legend>patient Registration</legend>
          <input type="text" placeholder="Enter your name" name="name">
+         
         <input type="date" placeholder="Select your date" name="date">
          <input type="text" placeholder="Enter your address" name="address">
         <input type="email" name="email" placeholder="Enter your email">
@@ -37,7 +38,8 @@
       async  function addPatient(e)
         {
             e.preventDefault()
-                var name=e.target.name.value
+                var username=e.target.name.value
+                var password=e.target.password.value
                 var dob=e.target.date.value
                 var address=e.target.address.value
                 var email=e.target.email.value

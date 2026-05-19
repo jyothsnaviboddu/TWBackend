@@ -10,7 +10,9 @@ const embeddedAppointmentSchema = new mongoose.Schema({
 });
 
 const patientSchema = new mongoose.Schema({
-  name: { type: String},
+  username: { type: String},
+  password:{type:String},
+  role:{type:String},
   dob: { type: Date },
   address: { type: String  },
   email: { type: String},
