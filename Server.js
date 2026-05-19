@@ -12,7 +12,7 @@ const appointmentmodel=require("./models/appointment.Model")
 const {sign}=require("./Controllers/user.Controller")
 const {login}=require("./Controllers/login.Controller")
 const {contact}=require("./Controllers/contact.Controller")
-const {addDoctor,deleteDoctor,allDoctors}=require("./Controllers/doctor.Controller")
+const {addDoctor,deleteDoctor,allDoctors,updateDoctor}=require("./Controllers/doctor.Controller")
 connect()
 app.use(bodyParser.json())
 app.use(cors())
@@ -92,7 +92,7 @@ app.post("/allAppointments",(req,res)=>
         }
    
 })
-
+app.post("/updateDoctor",updateDoctor)
 app.listen(3600,()=>{
     console.log("Server is running successfully")
 })

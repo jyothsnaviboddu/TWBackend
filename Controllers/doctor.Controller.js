@@ -47,10 +47,13 @@ const allDoctors=(req,res)=>{
         res.send(data)
     })
 }
-const updateDoctor=(req,res)=>
+const updateDoctor= async (req,res)=>
 {
-    const filter = { _id: req.body.id };
-        const updateDoc = {
+    var found=jwt.verify(req.headers.token,"Hello Admin")
+    if(found)
+    {
+         const filter = { _id: req.body.id };
+         const updateDoc = {
             $set:{
                     name:req.body.name,
                     email:req.body.email,
@@ -65,10 +68,14 @@ const updateDoctor=(req,res)=>
                     
                 },
      };
-const result = await doctorModel.updateOne(filter, updateDoc);
+    const result = await doctorModel.updateOne(filter, updateDoc);
+    res.send({"msg":"doctor updated",result})
 
+
+    }
+   
 }
-module.exports={addDoctor,deleteDoctor,allDoctors}
+module.exports={addDoctor,deleteDoctor,allDoctors,updateDoctor}
 /*
  "name":String,
     "email":String,
