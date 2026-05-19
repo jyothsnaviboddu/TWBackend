@@ -36,9 +36,10 @@ const login=async (req,res)=>
  else if(req.body.role==="admin")
      {
         let users=[]  
-        // res.send({"msg":"hello"})
+                // res.send({"msg":"hello"})
            await userModel.find().then((data)=>{
                 users=data
+                
            })
            const a_u=users.find((user)=>
             {
