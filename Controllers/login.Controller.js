@@ -35,10 +35,24 @@ const login=async (req,res)=>
    }
  else if(req.body.role==="admin")
      {
-           // res.send({"msg":"hello"})
+        let users=[]  
+        // res.send({"msg":"hello"})
            await userModel.find().then((data)=>{
-            console.log(data)
+                users=data
            })
+           const a_u=users.find((user)=>
+            {
+                 if(user.username===req.body.username && user.password===req.body.password)
+                {
+                    return true;
+                }
+         
+           })
+           if(a_u)
+           {
+                var token=jwt.sign({...req.body},"Hello Admin")
+                res.send({"msg":"Login Success",token,username:req.body.username})
+           }
      }
    else
    {
