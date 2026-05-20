@@ -4,7 +4,7 @@ const embeddedAppointmentSchema =mongoose.Schema({
   appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Appointment" },
   doctorName: String,
   doctorMail: String,
-  consultationFees: Number,
+  consultationFee: Number,
   status: { type: String },
   appointmentDate: Date,
   time:String
