@@ -3,7 +3,7 @@ const patient=(req,res)=>
 {
      var newPatient=new patientmodel(req.body)
       newPatient.save()
-    console.log(req.body)
+     console.log(req.body)
     res.send({"msg":"patient added",newPatient})
 }
 const allPatients= (req,res)=>{ 
