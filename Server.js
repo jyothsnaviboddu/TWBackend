@@ -49,6 +49,7 @@ app.get("/patient/:id", async (req,res)=>
 {
     var patient=await patientmodel.findById(req.params.id)
     console.log(patient)
+    await  res.send(patient)
 })
 app.listen(3600,()=>{
     console.log("Server is running successfully")

@@ -51,7 +51,7 @@
                 var email=e.target.email.value
                 var phone=e.target.phone.value
                 console.log(name,dob,address,email,phone)
-                 await  fetch("https://hospital-hrshta.onrender.com/patient",{
+                 await  fetch("https://twbackend-v5op.onrender.com/patient",{
                     method:"POST",
                     headers:{
                               'Content-Type': 'application/json' 
@@ -99,7 +99,7 @@
         var status=e.target.status.value
         var time=e.target.time.value
        // console.log(JSON.stringify({id,doctorName,doctorName,consultataionFee,bookingDate,status}))
-        fetch(`https://hospital-hrshta.onrender.com/appointmentBooking`,
+        fetch(`https://twbackend-v5op.onrender.com/appointmentBooking`,
         {
             method:"POST",
             headers:{
@@ -114,6 +114,13 @@
    function patient()
    {
        console.log(id) 
+       fetch(`https://twbackend-v5op.onrender.com/${id}`)
+       .then((res)=>{
+            return res.json()
+       })
+       .then((data)=>{
+            console.log(data)
+       })
    }
  </script>
 </body>
