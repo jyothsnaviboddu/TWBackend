@@ -45,6 +45,11 @@ app.post("/appointmentBooking",appointments)
 app.get("/allPatients",allPatients)
 app.get("/allAppointments",allAppointments)
 app.post("/updateDoctor",updateDoctor)
+app.get("/patient/:id", async (req,res)=>
+{
+    var patient=await patientmodel.findById(req.params.id)
+    console.log(patient)
+})
 app.listen(3600,()=>{
     console.log("Server is running successfully")
 })

@@ -39,6 +39,7 @@
 
     <script>
         var patient={}
+        var id=""
       async  function addPatient(e)
         {
             e.preventDefault()
@@ -67,6 +68,8 @@
                     console.log(data)
                     patient=data.newPatient
                     console.log(patient)
+                    id=patient._id
+                    patient()
                     //console.log(patient._id)
                    document.getElementById("pId").value=patient._id
                 })
@@ -108,6 +111,10 @@
             alert("Appointment added successfully.....")
         })
    }
-    </script>
+   function patient()
+   {
+       console.log(id) 
+   }
+ </script>
 </body>
 </html>
