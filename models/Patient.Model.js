@@ -1,6 +1,6 @@
 var mongoose=require("mongoose")
 var appointmentmodel=require("./appointment.Model")
-const embeddedAppointmentSchema = new mongoose.Schema({
+const embeddedAppointmentSchema =mongoose.Schema({
   appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Appointment" },
   doctorName: String,
   doctorMail: String,
@@ -10,7 +10,7 @@ const embeddedAppointmentSchema = new mongoose.Schema({
   time:String
 });
 
-const patientSchema = new mongoose.Schema({
+const patientSchema = mongoose.Schema({
   username: { type: String},
   password:{type:String},
   role:{type:String},
