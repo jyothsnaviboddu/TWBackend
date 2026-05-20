@@ -26,6 +26,7 @@ const {appointments,allAppointments}=require("./Controllers/appointments.Control
 const {patient,allPatients,singlePatient}=require("./Controllers/patient.Controllers")
 connect()
 const loginRoutes=require("./Routes/Authentication")
+const signRoute=require("./Routes/signRoute")
 app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname+"/Public"))
