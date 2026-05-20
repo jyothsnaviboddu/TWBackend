@@ -5,7 +5,7 @@ const embeddedAppointmentSchema = new mongoose.Schema({
   doctorName: String,
   doctorMail: String,
   consultationFees: Number,
-  status: { type: String, enum: ["pending", "confirmed", "cancelled"], default: "pending" },
+  status: { type: String },
   appointmentDate: Date,
   time:String
 });
