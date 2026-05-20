@@ -32,6 +32,7 @@ app.use(cors())
 app.use(express.static(__dirname+"/Public"))
 app.use(express.json())
 app.use("/login",loginRoutes)
+app.use("/signUp",signRoute)
 app.get("/",(req,res)=>{
     res.send({msg:"Hello all"})
 })
