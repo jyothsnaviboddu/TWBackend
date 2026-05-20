@@ -91,7 +91,7 @@
         var patientId=e.target.patientId.value
         var doctorName=e.target.doctorName.value
         var doctorMail=e.target.doctorMail.value
-        var consultataionFee=e.target.consultataionFee.value
+        var consultaionFee=e.target.consultataionFee.value
         var appointmentDate=e.target.bookingDate.value
         var status=e.target.status.value
         var time=e.target.time.value
@@ -102,7 +102,7 @@
             headers:{
                         'Content-Type': 'application/json'  
             },
-            body:JSON.stringify({patientId,doctorName,doctorMail,consultataionFee,appointmentDate,status,time})
+            body:JSON.stringify({patientId,doctorName,doctorMail,consultaionFee,appointmentDate,status,time})
         })
         .then((res)=>{
             alert("Appointment added successfully.....")
