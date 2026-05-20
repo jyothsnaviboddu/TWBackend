@@ -3,6 +3,17 @@ const app=express()
 const jwt=require("jsonwebtoken")
 const cors=require("cors")
 const bodyParser=require("body-parser")
+const multer=require('multer')
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './Uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null,'-' + uniqueSuffix+ file.originalname)
+  }
+})
+const upload = multer({ storage: storage })
 const connect=require("./db")
 const userModel=require("./models/users.Model")
 const contactModel=require("./models/contact.Model")
@@ -13,6 +24,8 @@ const {sign}=require("./Controllers/user.Controller")
 const {login}=require("./Controllers/login.Controller")
 const {contact}=require("./Controllers/contact.Controller")
 const {addDoctor,deleteDoctor,allDoctors,updateDoctor}=require("./Controllers/doctor.Controller")
+const {appointments,allAppointments}=require("./Controllers/appointments.Controller")
+const {patient,allPatients}=require("./Controllers/patient.Controllers")
 connect()
 app.use(bodyParser.json())
 app.use(cors())
@@ -26,58 +39,10 @@ app.post("/contact",contact)
 app.post("/addDoctor",addDoctor)
 app.get("/doctors",allDoctors)
 app.delete("/deleteDoctor",deleteDoctor)
-app.post("/patient",(req,res)=>{
-     var newPatient=new patientmodel(req.body)
-      newPatient.save()
-    console.log(req.body)
-    res.send({"msg":"patient added",newPatient})
-
-      //console.log(req.body)
-})
-app.post("/appointments",async (req,res)=>
-{       
-    var patient=await patientmodel.findById(req.body.patientId)
-    var { patientId,doctorName, doctorMail,consultationFee, appointmentDate, status,time}=req.body
-    var Appointment=new appointmentmodel({
-        patient:patientId,
-        doctorName,
-        doctorMail,
-        consultationFee,
-        status,
-        appointmentDate,
-        time
-    })
-    Appointment.save()
-    console.log(patient)
-  patient.appointments.push({
-      appointmentId: Appointment._id,
-      doctorName,
-      doctorMail,
-      consultationFee,
-      status,
-      appointmentDate,
-      time
-    });
-    await patient.save()
-})
-app.get("/allPatients",(req,res)=>{
-            patientmodel.find().then((data)=>{
-                res.send(data)
-            })
-    
-      /* patientmodel.find().then((data)=>{
-             res.send(data)
-       })*/
-
-})
-app.get("/allAppointments",(req,res)=>
-{
-            appointmentmodel.find().then((data)=>{
-                res.send(data)
-            })
-        
-   
-})
+app.post("/patient",patient)
+app.post("/appointments",appointments)
+app.get("/allPatients",allPatients)
+app.get("/allAppointments",allAppointments)
 app.post("/updateDoctor",updateDoctor)
 app.listen(3600,()=>{
     console.log("Server is running successfully")
