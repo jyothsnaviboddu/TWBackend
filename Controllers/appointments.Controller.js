@@ -1,31 +1,44 @@
 const appointmentmodel=require("../models/appointment.Model")
 const patientmodel=require("../models/Patient.Model")
 const appointments=async (req,res)=>
-{       
-    var patient=await patientmodel.findById(req.body.patientId)
-    var { patientId,doctorName, doctorMail,consultationFee, appointmentDate, status,time}=req.body
-    var Appointment=new appointmentmodel({
-        patient:patientId,
-        doctorName,
-        doctorMail,
-        consultationFee,
-        status,
-        appointmentDate,
-        time
-    })
-   await Appointment.save()
-  patient.appointments.push({
-      appointmentId: Appointment._id,
+{   
+    try
+     {
+    const { patientId, doctorName, doctorDetails, consultationFees, status, appointmentDate } = req.body;
+
+    const patient = await Patient.findById(patientId);
+      if (!patient) return res.status(404).json({ error: "Patient not found" });
+
+    
+    const appointment = new Appointment({
+      patient: patientId,
       doctorName,
-      doctorMail,
-      consultationFee,
+      doctorDetails,
+      consultationFees,
       status,
-      appointmentDate,
-      time
+      appointmentDate
     });
-    await patient.save()
-    res.send({"msg":"appointment confirmed"})
-}
+    await appointment.save();
+    patient.appointments.push({
+      appointmentId: appointment._id,
+      doctorName,
+      doctorDetails,
+      consultationFees,
+      status,
+      appointmentDate
+    });
+    await patient.save();
+
+    res.status(201).json({ message: "Appointment booked successfully", appointment, patient });
+  }
+ catch (error)
+  {
+    res.status(400).json({ error: error.message });
+  }
+
+
+ }
+    
 const allAppointments=(req,res)=>
 {
      appointmentmodel.find().then((data)=>
