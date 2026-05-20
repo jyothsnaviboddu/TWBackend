@@ -8,9 +8,16 @@ const patient= async (req,res)=>
   res.status(201).json({ newPatient });
 
 }
-const allPatients= (req,res)=>{ 
+const allPatients= (req,res)=>
+{ 
      patientmodel.find().then((data)=>{
                 res.send(data)
             })
-       } 
-module.exports={patient,allPatients}
+ }
+const singlePatient=async (req,res)=>
+{
+    var patient=await patientmodel.findById(req.params.id)
+    console.log(patient)
+    await  res.send(patient)
+}        
+module.exports={patient,allPatients,singlePatient}
