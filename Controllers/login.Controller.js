@@ -25,7 +25,7 @@ const login=async (req,res)=>
         if(a_u)
         {
                         var  token=jwt.sign({...req.body},"Hello User")
-                        res.send({msg:"login success",token,username:req.body.username,role:req.body.role})
+                        res.send({msg:"login success",token,a_u})
 
         }  
         else
