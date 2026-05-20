@@ -52,7 +52,7 @@ const updateDoctor= async (req,res)=>
     var found=jwt.verify(req.headers.token,"Hello Admin")
     if(found)
     {
-         const filter = { _id: req.body.id };
+         const filter = { _id: req.body._id };
          const updateDoc = {
             $set:{
                     name:req.body.name,
@@ -67,13 +67,16 @@ const updateDoctor= async (req,res)=>
                     status:req.body.status
                     
                 },
-     };
+            }
     const result = await doctorModel.updateOne(filter, updateDoc);
     res.send({"msg":"doctor updated",result})
 
 
     }
-   
+   else
+    {
+        res.send({"msg":"token mismatching"})
+    }
 }
 module.exports={addDoctor,deleteDoctor,allDoctors,updateDoctor}
 /*
