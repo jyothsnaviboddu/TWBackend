@@ -69,10 +69,10 @@
                     patient=data.newPatient
                     console.log(patient)
                     id=patient._id
-                    patient()
                     //console.log(patient._id)
                    document.getElementById("pId").value=patient._id
                 })
+                patientDetails()
         }
       //  console.log(patient)
        /* "name":String,
@@ -111,7 +111,7 @@
             alert("Appointment added successfully.....")
         })
    }
-   function patient()
+   function patientDetails()
    {
        console.log(id) 
        fetch(`https://twbackend-v5op.onrender.com/patient/${id}`)
