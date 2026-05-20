@@ -30,6 +30,7 @@ connect()
 app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname+"/Public"))
+app.use(express.json())
 app.get("/",(req,res)=>{
     res.send({msg:"Hello all"})
 })
