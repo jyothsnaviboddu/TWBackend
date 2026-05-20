@@ -13,7 +13,7 @@ const appointments=async (req,res)=>
         appointmentDate,
         time
     })
-    Appointment.save()
+   await Appointment.save()
   patient.appointments.push({
       appointmentId: Appointment._id,
       doctorName,

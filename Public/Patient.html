@@ -91,18 +91,18 @@
         var patientId=e.target.patientId.value
         var doctorName=e.target.doctorName.value
         var doctorMail=e.target.doctorMail.value
-        var consultaionFee=e.target.consultataionFee.value
+        var consultationFee=e.target.consultataionFee.value
         var appointmentDate=e.target.bookingDate.value
         var status=e.target.status.value
         var time=e.target.time.value
        // console.log(JSON.stringify({id,doctorName,doctorName,consultataionFee,bookingDate,status}))
-        fetch(`https://hospital-hrshta.onrender.com/appointments`,
+        fetch(`https://hospital-hrshta.onrender.com/appointmentBooking`,
         {
             method:"POST",
             headers:{
                         'Content-Type': 'application/json'  
             },
-            body:JSON.stringify({patientId,doctorName,doctorMail,consultaionFee,appointmentDate,status,time})
+            body:JSON.stringify({patientId,doctorName,doctorMail,consultationFee,appointmentDate,status,time})
         })
         .then((res)=>{
             alert("Appointment added successfully.....")
