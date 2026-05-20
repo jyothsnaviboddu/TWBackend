@@ -1,10 +1,10 @@
 const patientmodel=require("../models/Patient.Model")
-const patient=(req,res)=>
+const patient= async (req,res)=>
 {
      var newPatient=new patientmodel(req.body)
-      newPatient.save()
+    await newPatient.save()
      console.log(req.body)
-    res.send({"msg":"patient added",newPatient})
+   await res.send({"msg":"patient added",newPatient})
 }
 const allPatients= (req,res)=>{ 
      patientmodel.find().then((data)=>{
