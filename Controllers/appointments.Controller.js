@@ -3,7 +3,7 @@ const patientmodel=require("../models/Patient.Model")
 const appointments=async (req,res)=>
 {   
     const { patientId, doctorName, doctorDetails, consultationFees, status, appointmentDate } = req.body;
-    const patient = await Patient.findById(patientId);
+    const patient = await patientmodel.findById(patientId);
     if (!patient) return res.status(404).json({ error: "Patient not found" });
     const appointment = new Appointment({
       patient: patientId,
