@@ -45,6 +45,7 @@ app.use("/patients",addPatient)
 app.use("/updataDoctor",updateDoctor)
 app.use("/appointmentBooking",appointmentBooking)
 app.use("/allAppointments",allAppointments)
+app.use("/allPatients",allPatients)
 app.use("/patient",singlePatientRoute)
 app.get("/",(req,res)=>{
     res.send({msg:"Hello all"})
