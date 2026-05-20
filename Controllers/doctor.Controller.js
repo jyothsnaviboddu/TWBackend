@@ -17,8 +17,7 @@ const addDoctor=(req,res)=>
             "fees":req.body.fees,
             "phone":req.body.phone,
             "address":req.body.address,
-            "appointments":0,
-            "image":req.file.filename
+            "appointments":0
             })
             newDoctor.save()
                 res.send({"msg":"Doctor added successfully...."})
