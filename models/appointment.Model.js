@@ -5,7 +5,7 @@ var appointmentSchema=mongoose.Schema(
         doctorName: { type: String,},
         doctorMail: { type: String },
         consultationFee: { type: Number},
-        status: { type: String, enum: ["pending", "confirmed", "cancelled"], default: "pending" },
+        status: { type: String },
         appointmentDate: { type: Date } ,
         time:{type:String}
                 
