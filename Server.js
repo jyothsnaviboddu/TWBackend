@@ -37,7 +37,7 @@ app.get("/",(req,res)=>{
 app.post("/signUp",sign)
 app.post("/login",login)
 app.post("/contact",contact)
-app.post("/addDoctor",addDoctor)
+app.post("/addDoctor",upload.single("image"),addDoctor)
 app.get("/doctors",allDoctors)
 app.delete("/deleteDoctor",deleteDoctor)
 app.post("/patients",patient)
