@@ -9,7 +9,7 @@ const appointments=async (req,res)=>
       patient: patientId,
       doctorName,
       doctorDetails,
-      consultationFees,
+      consultationFee,
       status,
       appointmentDate
     });
@@ -18,7 +18,7 @@ const appointments=async (req,res)=>
       appointmentId: appointment._id,
       doctorName,
       doctorDetails,
-      consultationFees,
+      consultationFee,
       status,
       appointmentDate
     });
